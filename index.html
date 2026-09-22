@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Guita</title>
+
+<meta
+  property="og:title"
+  content="Guita"
+>
+
+<meta
+  property="og:description"
+  content="Registrá tus gastos en segundos."
+>
+  
+  <meta
+    name="description"
+    content="Registrá tus gastos en segundos."
+  >
+
+  <!-- PWA -->
+  <meta name="theme-color" content="#f5f5f5">
+
+  <link
+    rel="manifest"
+    href="manifest.json"
+  >
+
+  <!-- WHATSAPP / OPEN GRAPH -->
+  <meta
+    <meta
+    property="og:image"
+  content="assets/social/guita-share.jpg"
+>
+  >
+
+  <meta
+    property="og:title"
+    content="Gastos IA"
+  >
+
+  <meta
+    property="og:description"
+    content="Registrá tus gastos en segundos."
+  >
+
+  <meta
+    property="og:image"
+    content="assets/social/gastos-ia-share.jpg"
+  >
+
+  <!-- CSS -->
+  <link
+    rel="stylesheet"
+    href="css/app.css"
+  >
+
+</head>
+
+
+<body>
+
+  <main class="app">
+
+    <header>
+
+      <p class="eyebrow">
+        CONTROL PERSONAL
+      </p>
+
+      <h1>
+        Guita
+      </h1>
+
+    </header>
+
+
+    <!-- TOTAL HOY -->
+
+    <section class="resumen">
+
+      <span>
+        HOY
+      </span>
+
+      <strong id="totalHoy">
+        $0
+      </strong>
+
+    </section>
+
+
+    <!-- ENTRADA -->
+
+    <section class="entrada">
+
+      <label for="gastoInput">
+        ¿Qué gastó?
+      </label>
+
+      <input
+        id="gastoInput"
+        type="text"
+        inputmode="text"
+        autocomplete="off"
+        placeholder="100.000 shell"
+        autofocus
+      >
+
+      <p class="ayuda">
+        Ej.: 100.000 shell · 45k ypf · 35.000 coto ayer
+      </p>
+
+      <button
+        id="guardarBtn"
+        type="button"
+      >
+        GUARDAR
+      </button>
+
+      <p
+        id="mensaje"
+        class="mensaje"
+        aria-live="polite"
+      ></p>
+
+    </section>
+
+
+    <!-- HISTORIAL -->
+
+    <section class="historial">
+
+      <div class="historial-header">
+
+        <h2>
+          Movimientos
+        </h2>
+
+        <span id="cantidadGastos">
+          0
+        </span>
+
+      </div>
+
+      <div id="listaGastos"></div>
+
+    </section>
+
+  </main>
+
+
+  <!-- IMPORTANTE: ESTE ORDEN -->
+
+  <script src="js/categories.js"></script>
+
+  <script src="js/parser.js"></script>
+
+  <script src="js/storage.js"></script>
+
+  <script src="js/app.js"></script>
+
+
+  <!-- SERVICE WORKER -->
+
+  <script>
+
+    if ("serviceWorker" in navigator) {
+
+      window.addEventListener(
+        "load",
+        () => {
+
+          navigator.serviceWorker
+            .register("./sw.js")
+            .catch(
+              error =>
+                console.error(
+                  "Service Worker:",
+                  error
+                )
+            );
+
+        }
+      );
+
+    }
+
+  </script>
+
+</body>
+
+</html>
