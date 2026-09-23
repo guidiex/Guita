@@ -12,40 +12,37 @@
 
   <title>Guita</title>
 
-<meta
-  property="og:title"
-  content="Guita"
->
-
-<meta
-  property="og:description"
-  content="Registrá tus gastos en segundos."
->
-  
   <meta
     name="description"
     content="Registrá tus gastos en segundos."
   >
 
-  <!-- PWA -->
-  <meta name="theme-color" content="#f5f5f5">
+  <meta
+    name="theme-color"
+    content="#f3f3f0"
+  >
 
   <link
     rel="manifest"
     href="manifest.json"
   >
 
-  <!-- WHATSAPP / OPEN GRAPH -->
+  <link
+    rel="stylesheet"
+    href="css/app.css"
+  >
+
+
+  <!-- OPEN GRAPH -->
+
   <meta
-    <meta
-    property="og:image"
-  content="assets/social/guita-share.jpg"
->
+    property="og:type"
+    content="website"
   >
 
   <meta
     property="og:title"
-    content="Gastos IA"
+    content="Guita"
   >
 
   <meta
@@ -55,13 +52,7 @@
 
   <meta
     property="og:image"
-    content="assets/social/gastos-ia-share.jpg"
-  >
-
-  <!-- CSS -->
-  <link
-    rel="stylesheet"
-    href="css/app.css"
+    content="assets/social/guita-share.jpg"
   >
 
 </head>
@@ -70,6 +61,9 @@
 <body>
 
   <main class="app">
+
+
+    <!-- HEADER -->
 
     <header>
 
@@ -93,13 +87,13 @@
       </span>
 
       <strong id="totalHoy">
-        $0
+        $ 0
       </strong>
 
     </section>
 
 
-    <!-- ENTRADA -->
+    <!-- ENTRADA MANUAL -->
 
     <section class="entrada">
 
@@ -113,12 +107,12 @@
         inputmode="text"
         autocomplete="off"
         placeholder="100.000 shell"
-        autofocus
       >
 
       <p class="ayuda">
-        Ej.: 100.000 shell · 45k ypf · 35.000 coto ayer
+        Ej.: 100000 shell · 35000 coto ayer · 45k ypf
       </p>
+
 
       <button
         id="guardarBtn"
@@ -126,6 +120,178 @@
       >
         GUARDAR
       </button>
+
+
+      <!-- FOTO TICKET -->
+
+      <button
+        id="ticketBtn"
+        class="ticket-btn"
+        type="button"
+      >
+        📷 FOTO TICKET
+      </button>
+
+
+      <input
+        id="ticketInput"
+        type="file"
+        accept="image/*"
+        capture="environment"
+        hidden
+      >
+
+
+      <!-- PREVIEW -->
+
+      <section
+        id="ticketPreview"
+        class="ticket-preview"
+        hidden
+      >
+
+        <div class="ticket-preview-header">
+
+          <span>
+            TICKET
+          </span>
+
+          <button
+            id="cerrarTicketBtn"
+            type="button"
+            aria-label="Cerrar ticket"
+          >
+            ×
+          </button>
+
+        </div>
+
+
+        <img
+          id="ticketImagen"
+          alt="Foto del ticket"
+        >
+
+
+        <button
+          id="procesarTicketBtn"
+          type="button"
+        >
+          LEER TICKET
+        </button>
+
+      </section>
+
+
+      <!-- REVISIÓN OCR -->
+
+      <section
+        id="ticketRevision"
+        class="ticket-revision"
+        hidden
+      >
+
+        <div class="revision-titulo">
+
+          <span>
+            REVISAR GASTO
+          </span>
+
+          <span class="revision-badge">
+            OCR
+          </span>
+
+        </div>
+
+
+        <div class="revision-campo">
+
+          <label for="ticketComercio">
+            Comercio
+          </label>
+
+          <input
+            id="ticketComercio"
+            type="text"
+            autocomplete="off"
+          >
+
+        </div>
+
+
+        <div class="revision-campo">
+
+          <label for="ticketMonto">
+            Monto
+          </label>
+
+          <input
+            id="ticketMonto"
+            type="number"
+            inputmode="decimal"
+            min="0"
+            step="0.01"
+          >
+
+        </div>
+
+
+        <div class="revision-campo">
+
+          <label for="ticketFecha">
+            Fecha
+          </label>
+
+          <input
+            id="ticketFecha"
+            type="date"
+          >
+
+        </div>
+
+
+        <div class="revision-campo">
+
+          <label for="ticketCategoria">
+            Categoría
+          </label>
+
+          <select id="ticketCategoria">
+
+            <option value="combustible">
+              Combustible
+            </option>
+
+            <option value="supermercado">
+              Supermercado
+            </option>
+
+            <option value="farmacia">
+              Farmacia
+            </option>
+
+            <option value="comida">
+              Comida
+            </option>
+
+            <option value="sin categoría">
+              Sin categoría
+            </option>
+
+          </select>
+
+        </div>
+
+
+        <button
+          id="confirmarTicketBtn"
+          type="button"
+        >
+          CONFIRMAR GASTO
+        </button>
+
+      </section>
+
 
       <p
         id="mensaje"
@@ -152,20 +318,29 @@
 
       </div>
 
+
       <div id="listaGastos"></div>
 
     </section>
 
+
   </main>
 
 
-  <!-- IMPORTANTE: ESTE ORDEN -->
+  <!-- OCR -->
+
+  <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+
+
+  <!-- GUITA -->
 
   <script src="js/categories.js"></script>
 
   <script src="js/parser.js"></script>
 
   <script src="js/storage.js"></script>
+
+  <script src="js/ticket-parser.js"></script>
 
   <script src="js/app.js"></script>
 
